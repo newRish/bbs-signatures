@@ -24,17 +24,20 @@ let useWasm = !(
     process.env.BBS_SIGNATURES_MODE === BBS_SIGNATURES_MODES.nodejs)
 );
 
-try {
-  if (!useWasm) {
-    module.exports = require("@mattrglobal/node-bbs-signatures");
-  }
-} catch {
-  if (process.env.BBS_SIGNATURES_MODE === BBS_SIGNATURES_MODES.nodejs) {
-    throw new Error(FAILED_TO_LOAD_NODE_MODULE);
-  }
-  useWasm = true;
-}
 
-if (useWasm) {
-  module.exports = require("./wasm_module");
-}
+module.exports = require("./wasm_module");
+
+// try {
+//   if (!useWasm) {
+//     module.exports = require("@mattrglobal/node-bbs-signatures");
+//   }
+// } catch {
+//   if (process.env.BBS_SIGNATURES_MODE === BBS_SIGNATURES_MODES.nodejs) {
+//     throw new Error(FAILED_TO_LOAD_NODE_MODULE);
+//   }
+//   useWasm = true;
+// }
+
+// if (useWasm) {
+//   module.exports = require("./wasm_module");
+// }
